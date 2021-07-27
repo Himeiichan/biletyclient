@@ -32,7 +32,7 @@ class App extends React.Component {
     handleLoginSubmit = (e) => {
       e.preventDefault();
   
-      fetch("https://meble-api.herokuapp.com/users/login", {
+      fetch("https://http://localhost:3000/users/login", {
         method: "POST",
         body: JSON.stringify({
           email: this.state.email,
@@ -61,7 +61,7 @@ class App extends React.Component {
         });
     };
     handleLogout = () => {
-      fetch("https://meble-api.herokuapp.com/users/logout", {
+      fetch("https://http://localhost:3000/users/logout", {
         headers: {
           "x-access-token": localStorage.getItem("accessToken"),
           "Content-Type": "application/json",

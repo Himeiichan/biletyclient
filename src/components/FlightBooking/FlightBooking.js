@@ -1,6 +1,7 @@
 import React from "react";
 // import moment from "moment";
 import "./FlightBooking.css";
+import Seat from "./Seat"
 
 
 class FlightBooking extends React.Component {
@@ -90,9 +91,27 @@ class FlightBooking extends React.Component {
     };
   
   render() {
-    console.log("Data startu", this.state.startDate,typeof(this.state.startDate));
-    console.log("Data powrotu", this.state.returnDate, typeof(this.state.returnDate));
-    console.log("Min data powrotu:",this.state.minReturnDate, typeof(this.state.minReturnDate))
+    let seatList = [];
+    seatList.length=180; 
+    for (let i = 0; i < seatList.length; i++){
+      let seat = {
+      id: i,
+      name: i,
+      isActive: false,
+      extraBaggage: false,
+      price: 150,
+    };
+      seatList[i] = seat;
+    }
+    console.log("gjgh",seatList);
+
+    seatList= seatList.map((seat, index) => (<Seat key={index} name={seat.name} isActive={seat.isActive} extraBaggage={seat.extraBaggage} price={seat.price}/>))
+    
+
+    
+    // console.log("Data startu", this.state.startDate,typeof(this.state.startDate));
+    // console.log("Data powrotu", this.state.returnDate, typeof(this.state.returnDate));
+    // console.log("Min data powrotu:",this.state.minReturnDate, typeof(this.state.minReturnDate))
     
     
     return (
@@ -102,7 +121,7 @@ class FlightBooking extends React.Component {
               Wybierz rezerwacje
             </h2>
             <div className="departure">
-                  <label for="departureCity">Wylot:</label>
+                  <label htmlFor="departureCity">Wylot:</label>
                   <select name="departureCity" id="departureCity" form="departureCity">
                   <option value="Kraków">Kraków</option>
                   <option value="Warszawa">Warszawa</option>
@@ -111,7 +130,7 @@ class FlightBooking extends React.Component {
                   </select>
               </div>
             <div className="arrival">
-                <label for="arrivalCity">Przylot:</label>
+                <label htmlFor="arrivalCity">Przylot:</label>
                 <select name="arrivalCity" id="arrivalCity" form="arrivalCity">
                 <option value="Kraków">Kraków</option>
                 <option value="Warszawa">Warszawa</option>
@@ -120,7 +139,7 @@ class FlightBooking extends React.Component {
                 </select>
             </div>
             <div className={"departureDate"}>
-              <label for="start">Data wylotu:</label>
+              <label htmlFor="start">Data wylotu:</label>
               <input type="date"
                 id="startDate"
                 name="startDate"
@@ -131,7 +150,7 @@ class FlightBooking extends React.Component {
             />
           </div>
           <div className={"arrivalDate"}>
-              <label for="return">Data powrotu:</label>
+              <label htmlFor="return">Data powrotu:</label>
               <input type="date"
                 id="returnDate"
                 name="returnDate"
@@ -142,6 +161,12 @@ class FlightBooking extends React.Component {
               />
             </div>
         </form>
+        <div className="airplane">
+            <div className="container">
+            {seatList}
+
+            </div>
+        </div>
       </div>
         
     );
